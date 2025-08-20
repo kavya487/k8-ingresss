@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app2
+  labels:
+    app: app2
+spec:
+  replicas: 3
+  selector:
+    matchLabels: 
+      app: app2
+  template:
+    metadata:
+      labels:
+        app: app2
+    spec:
+      containers:     
+      - name: nginx
+        image: kavya478/app2:1.0.0
+        ports:
+        - containerPort: 80
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: app2
+  
+spec:
+  selector:
+    app: app2
+  ports:
+  - protocol: TCP
+    containerPort: 80
+    targtePort: 80
+    nodEPort: 3007
+
+
+---
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name:  app2-ingress
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listener-ports: '[{ "HTTPS": 443 }]'
+    alb.ingress.kubernetes.io/certficate-arn: arn:aws:acm:us-east-1:723626972738:certificate/fe3a9a72-d6bd-4daf-9467-61757fda68f8
+    alb.ingress.kubernetes.io/group-name: kavya478
+spec:
+  ingressClassName: alb
+  rules:
+  - host: "app1.kavyadev.shop"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend: 
+          service:
+            name: app1
+            port:
+              number: 80
