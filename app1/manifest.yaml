@@ -12,16 +12,15 @@ spec:
       app:  app1
     
   template:
-  metadata:
-    labels:
-      app: app1
-   
-  spec:
-    containers:
-    - name: nginx
-      image: kavya478/app:1.0.0
-      ports:
-      - containerPort: 80
+    metadata:
+      labels:
+        app: app1
+    spec:
+      containers:
+      - name: nginx
+        image: kavya478/app:1.0.0
+        ports:
+        - containerPort: 80
     
 ---
 kind: Service
@@ -34,7 +33,7 @@ spec:
     tier: web
   ports:
   - protocol:
-    ports: 80
+    port: 80
     targetPort: 80
     nodePort: 30007
 
@@ -61,5 +60,5 @@ spec:
         backend: 
           service:
             name: app1
-            ports:
+            port:
               number: 80
