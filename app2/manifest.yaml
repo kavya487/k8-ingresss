@@ -45,7 +45,7 @@ metadata:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/listener-ports: '[{ "HTTPS": 443 }]'
-    alb.ingress.kubernetes.io/certficate-arn: arn:aws:acm:us-east-1:723626972738:certificate/fe3a9a72-d6bd-4daf-9467-61757fda68f8
+    alb.ingress.kubernetes.io/certficate-arn: arn:aws:acm:us-east-1:723626972738:certificate/168280d1-606b-48da-a742-45a85ea15de6
     alb.ingress.kubernetes.io/group-name: kavya478
 spec:
   ingressClassName: alb
