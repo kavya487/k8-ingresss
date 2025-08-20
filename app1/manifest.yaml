@@ -29,8 +29,8 @@ metadata:
   name: app1
 spec:
   selector:
-    app: nginx
-    tier: web
+    app: app1
+    
   ports:
   - protocol:
     port: 80
@@ -55,7 +55,7 @@ spec:
   - host: "app1.kavyadev.shop"
     http:
       paths:
-      - pathType: 
+      - pathType: Prefix
         path: "/"
         backend: 
           service:
